@@ -37,8 +37,8 @@ def set_driver(driver_path, headless_flg):
 # main処理
 
 
-def main():
-    search_keyword = "高収入"
+def main(keyword,csv):
+    search_keyword = keyword
     # driverを起動
     if os.name == 'nt': #Windows
         driver = set_driver("chromedriver.exe", False)
@@ -78,7 +78,7 @@ def main():
              "項目C": ""}, 
             ignore_index=True)
     
-    df.to_csv('to_csv_out.csv',encoding="utf_8-sig")
+    df.to_csv(csv,encoding="utf_8-sig")
         
         
 # 直接起動された場合はmain()を起動(モジュールとして呼び出された場合は起動しないようにするため)
