@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>pos</title>
+</head>
+<body class="px-3 pt-3">
+    <div class="mb-4">
+        <p class="mb-0">商品コード(001～004)</p>
+        <input type="text" id="item_code" class="mb-3"></input>
+
+        <p class="mb-0">個数</p>
+        <input type="text" id="item_count" class="mb-3"></input><br>
+
+        <button id="add" class="bg-primary text-white border-primary rounded-pill">オーダー登録</button>
+    </div>
+
+    <script type="text/javascript" src="./eel.js"></script>
+    <script>
+        
+
+        add.addEventListener('click', () => {
+            if(item_code.value == ''){
+                alert('商品コードを入力してください')
+            }
+            else if(item_count.value == ''){
+                alert('個数を入力してください')
+            }
+
+            else{
+                eel.add_order(item_code.value,item_count.value)
+                eel.display_order_data()
+            }
+        })
+        actuarial.addEventListener('click', () => {
+            if(money.value == ''){
+                alert('お預かり金額を入力してください')
+            }
+
+            else{
+                eel.compute_change(money.value)
+            }
+        })
+
+
+        eel.expose(clear_info)
+        function clear_info(){
+          var textForm_code = document.getElementById("item_code");
+          textForm_code.value = '';
+
+          var textForm_count = document.getElementById("item_count");
+          textForm_count.value = '';
+
+          var textForm_data = document.getElementById("item_data");
+          textForm_data.value = '';
+        }
+
+        eel.expose(view_log_data)
+        function view_log_data(data){
+            item_data.value += data + '\n'
+        }
+        eel.expose(view_log_sum)
+        function view_log_sum(sum){
+            item_sum.value = sum
+        }
+        eel.expose(view_log_change)
+        function view_log_change(change){
+            change_money.value = change + '円'
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
