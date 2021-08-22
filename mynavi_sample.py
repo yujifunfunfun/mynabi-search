@@ -63,19 +63,20 @@ def main(keyword,csv):
     # ページ終了まで繰り返し取得
     # 検索結果の一番上の会社名を取得
     name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
-    
+    job_list = driver.find_elements_by_xpath("/html/body/div[1]/div[3]/form/div/div/div/div[2]/div[1]/table/tbody/tr[1]/td")
+    income_list = driver.find_elements_by_xpath("/html/body/div[1]/div[3]/form/div/div/div/div[2]/div[1]/table/tbody/tr[5]/td")
     # 空のDataFrame作成
     df = pd.DataFrame()
 
     # 1ページ分繰り返し
     print(len(name_list))
-    for name in name_list:
+    for name,job,income in zip(name_list,job_list,income_list):
         print(name.text)
         # DataFrameに対して辞書形式でデータを追加する
         df = df.append(
             {"会社名": name.text, 
-             "項目B": "",
-             "項目C": ""}, 
+             "仕事内容": job.text,
+             "初年度年収": income.text}, 
             ignore_index=True)
     
     df.to_csv(csv,encoding="utf_8-sig")
